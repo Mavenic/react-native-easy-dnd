@@ -74,15 +74,13 @@ export function draggable(
         },
         onPanResponderRelease: e => {
           const { pageX, pageY } = e.nativeEvent;
-
-          if (this.props.bounceBack) {
-            Animated.spring(this.state.pan, {
-              toValue: { x: 0, y: 0 }
-            }).start();
-          }
           this.props.__dndContext.handleDragEnd(this.identifier, {
             x: pageX,
             y: pageY
+          },() => {
+            Animated.spring(this.state.pan, {
+              toValue: { x: 0, y: 0 }
+            }).start();
           });
         }
       });
