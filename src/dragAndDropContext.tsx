@@ -178,7 +178,8 @@ function createDndContext(): DragAndDropContext {
       if (draggable && droppable && droppable.onDrop) {
         droppable.onDrop(draggable, position);
       } else {
-       revertBack(); 
+        if(revertBack)
+          revertBack(); 
       }
 
       if (draggable && draggable.onDragEnd) {
