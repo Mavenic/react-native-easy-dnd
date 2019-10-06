@@ -171,12 +171,14 @@ function createDndContext(): DragAndDropContext {
       }
     };
 
-    handleDragEnd = (draggingId: DndId, position: Position) => {
+    handleDragEnd = (draggingId: DndId, position: Position, revertBack) => {
       const droppable = this.getDroppableInArea(position);
       const draggable = this.getDraggable(draggingId);
 
       if (draggable && droppable && droppable.onDrop) {
         droppable.onDrop(draggable, position);
+      } else {
+       revertBack(); 
       }
 
       if (draggable && draggable.onDragEnd) {
